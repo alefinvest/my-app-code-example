@@ -1,6 +1,13 @@
+// Demonstrate hooks in Component
 import React, { useState } from "react";
 
 const WordReveal = ({ str }) => {
+  // Provide in React Dev Tools for this particular Component next parameters:
+  //  { 
+  //    props
+  //      str: "NotABigSecret"
+  //    hooks
+  //      State: -1
   const [wordIndex, setWordIndex] = useState(-1);
   return (
     <div>
