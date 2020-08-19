@@ -1,5 +1,4 @@
 import React from 'react';
-import WordReveal from "./WordReveal";
 import '../css/App.css';
 
 class App extends React.Component {
@@ -17,7 +16,6 @@ class App extends React.Component {
             </div>
           </div>
         </div>
-        <WordReveal str="NotABigSecret" />
       </main>
     );
   }
