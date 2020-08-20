@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Moment from 'react-moment';
 
