@@ -29,7 +29,6 @@ class App extends React.Component {
     this.setState({
       queryText: query
     });
-    // console.log(query);
   }
 
   changeOrder(order, dir) {
