@@ -14,6 +14,7 @@ class App extends React.Component {
       formDisplay: false,
       orderBy: 'petName',
       orderDir: 'asc',
+      queryText: '',
       lastIndex: 0
     };
     this.deleteAppointment = this.deleteAppointment.bind(this);
@@ -21,6 +22,14 @@ class App extends React.Component {
     this.toggleForm = this.toggleForm.bind(this);
     this.deleteAppointment = this.deleteAppointment.bind(this);
     this.changeOrder = this.changeOrder.bind(this);
+    this.searchApts = this.searchApts.bind(this);
+  }
+
+  searchApts(query) {
+    this.setState({
+      queryText: query
+    });
+    // console.log(query);
   }
 
   changeOrder(order, dir) {
@@ -68,14 +77,14 @@ class App extends React.Component {
   render() {
 
     let order;
-    let filterApts = this.state.myAppointments;
+    let filteredApts = this.state.myAppointments;
     if (this.state.orderDir === 'asc') {
       order = 1;
     } else {
       order = -1;
     }
 
-    filterApts.sort((a,b) => {
+    filteredApts = filteredApts.sort((a,b) => {
       if (a[this.state.orderBy].toLowerCase() <
           b[this.state.orderBy].toLowerCase()
       ) {
@@ -83,6 +92,19 @@ class App extends React.Component {
       } else {
         return 1 * order;
       }
+    })
+    .filter(eachItem  => {
+      return (
+        eachItem['petName']
+        .toLowerCase()
+        .includes(this.state.queryText.toLowerCase()) ||
+        eachItem['ownerName']
+        .toLowerCase()
+        .includes(this.state.queryText.toLowerCase()) ||
+        eachItem['aptNotes']
+        .toLowerCase()
+        .includes(this.state.queryText.toLowerCase())
+      );
     })
 
     return (
@@ -100,9 +122,10 @@ class App extends React.Component {
                   orderBy={this.state.orderBy}
                   orderDir={this.state.orderDir}
                   changeOrder={this.changeOrder}
+                  searchApts={this.searchApts}
                 />
                 <ListAppointments 
-                  appointments={filterApts}
+                  appointments={filteredApts}
                   deleteAppointment={this.deleteAppointment}
                   />
               </div>
